@@ -17,6 +17,7 @@ public class JavaGenerator {
 
         FileWriter w = new FileWriter(OUTPUT_DIR + c.name + ".java");
 
+        w.write("package generated;\n");
         w.write("public class " + c.name);
 
         if (c.parent != null) {
