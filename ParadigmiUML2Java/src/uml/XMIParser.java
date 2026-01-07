@@ -14,13 +14,21 @@ public class XMIParser {
         factory.setNamespaceAware(true);
 
         DocumentBuilder builder = factory.newDocumentBuilder();
+        
         Document doc = builder.parse(new File(xmiFile));
+        if (doc==null) {
+        	System.out.println("Taa mal");
+        }
 
         NodeList classNodes = doc.getElementsByTagNameNS("*", "Class");
 
+     // Si sigue dando 0, intenta buscar los elementos empaquetados que son tipo Clase
+     if (classNodes.getLength() == 0) {
+         classNodes = doc.getElementsByTagNameNS("*", "packagedElement");
+     }
         for (int i = 0; i < classNodes.getLength(); i++) {
             Element classElement = (Element) classNodes.item(i);
-
+            
             UMLClass umlClass = new UMLClass();
             umlClass.name = classElement.getAttribute("name");
 
@@ -34,8 +42,9 @@ public class XMIParser {
                 if (a.type.isEmpty()) a.type = "Object";
                 umlClass.attributes.add(a);
             }
+           
 
-            // Métodos
+            // MÃ©todos
             NodeList operations = classElement.getElementsByTagNameNS("*", "ownedOperation");
             for (int j = 0; j < operations.getLength(); j++) {
                 Element op = (Element) operations.item(j);

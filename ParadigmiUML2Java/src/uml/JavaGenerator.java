@@ -2,10 +2,20 @@ package uml;
 
 import java.io.*;
 
+
+
 public class JavaGenerator {
 
+    private static final String OUTPUT_DIR = "src/generated/";
+
     public static void generate(UMLClass c) throws IOException {
-        FileWriter w = new FileWriter(c.name + ".java");
+
+        File dir = new File(OUTPUT_DIR);
+        if (!dir.exists()) {
+            dir.mkdirs();
+        }
+
+        FileWriter w = new FileWriter(OUTPUT_DIR + c.name + ".java");
 
         w.write("public class " + c.name);
 
@@ -30,4 +40,3 @@ public class JavaGenerator {
         w.close();
     }
 }
-
