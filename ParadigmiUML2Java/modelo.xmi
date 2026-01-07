@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<XMI xmi.version="1.1" xmlns:xmi="http://www.omg.org/XMI">
+  <XMI.content>
+
+    <Class name="Vehiculo">
+      <ownedAttribute name="marca" type="String"/>
+      <ownedAttribute name="precio" type="double"/>
+      <ownedOperation name="arrancar"/>
+      <ownedOperation name="frenar"/>
+    </Class>
+
+    <Class name="Coche">
+      <generalization general="Vehiculo"/>
+      <ownedAttribute name="puertas" type="int"/>
+      <ownedOperation name="abrirMaletero"/>
+    </Class>
+
+  </XMI.content>
+</XMI>
